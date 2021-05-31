@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import BackButton from '../../components/BackButton/BackButton';
 import Button from '../../components/Button/Button';
 import ArtistCard from '../../components/ArtistCard/ArtistCard';
@@ -10,6 +11,8 @@ import NavBar from '../../components/NavBar/NavBar';
 const categoriesArray = ['Movie', 'Adventure', 'Comedy', 'Family'];
 
 function MovieDetails(): JSX.Element {
+  const { name } = useParams<{ name: string }>();
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -17,7 +20,7 @@ function MovieDetails(): JSX.Element {
       </header>
       <main className={styles.main}>
         <div className={styles.MovieTrailer}>
-          <p>Insert movie trailer here</p>
+          <p>{name}</p>
           <NavigationGenre categories={categoriesArray} />
         </div>
         <Rating value={4} />
