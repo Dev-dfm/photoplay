@@ -14,7 +14,7 @@ export default function NavBarLink({
   link,
 }: LinkProps): JSX.Element {
   return (
-    <Link className={styles.link} to="#">
+    <Link className={styles.link} to={link}>
       {icon}
       <span>{text}</span>
     </Link>

@@ -12,7 +12,7 @@ function NavBar(): JSX.Element {
       <NavBarLink icon={<HomeIcon />} text="Home" link="/" />
       <NavBarLink icon={<SearchIcon />} text="Search" link="#" />
       <NavBarLink icon={<DownloadIcon />} text="Download" link="#" />
-      <NavBarLink icon={<ProfileIcon />} text="Profile" link="#" />
+      <NavBarLink icon={<ProfileIcon />} text="Profile" link="/profile" />
     </div>
   );
 }
