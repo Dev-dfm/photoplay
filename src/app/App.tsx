@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, RouteProps } from 'react-router-dom';
 import Register from './Page/Register';
 import Login from './pages/Login/Login';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
@@ -9,37 +9,31 @@ import Homescreen from './pages/Homescreen/Homescreen';
 import Profile from './pages/Profile/Profile';
 import TVShowDetails from './pages/TVShowDetails/TVShowDetails';
 
+type CustomRouteProps = RouteProps & {
+  Component: () => JSX.Element;
+  path: string;
+};
+
+const routes: CustomRouteProps[] = [
+  { path: '/', Component: Homescreen, exact: true },
+  { path: '/login', Component: Login },
+  { path: '/register', Component: Register },
+  { path: '/forgotpassword', Component: ForgotPassword },
+  { path: '/profile', Component: Profile },
+  { path: '/casts/:name', Component: Cast },
+  { path: '/movie/:name', Component: MovieDetails },
+  { path: '/tvshows/:name', Component: TVShowDetails },
+];
+
 function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <Homescreen />
-        </Route>
-        <Route path="/help">
-          <p>Help</p>
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/forgotpassword">
-          <ForgotPassword />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-        <Route path="/casts/:name">
-          <Cast />
-        </Route>
-        <Route path="/movies/:name">
-          <MovieDetails />
-        </Route>
-        <Route path="/shows/:name">
-          <TVShowDetails />
-        </Route>
+        {routes.map(({ Component, ...routeProps }) => (
+          <Route key={routeProps.path} {...routeProps}>
+            <Component />
+          </Route>
+        ))}
       </Switch>
     </BrowserRouter>
   );
